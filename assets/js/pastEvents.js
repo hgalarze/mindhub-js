@@ -26,13 +26,14 @@ function fillGrid(events) {
       const eventTitle = eventCard.querySelector(".event-title");
       const eventDescription = eventCard.querySelector(".event-description");
       const eventPrice = eventCard.querySelector(".event-price");
+      const eventDetailButton = eventCard.querySelector(".event-detail-button");
 
       // Set event properties
-      eventCard.dataset.id = event.id;
       eventPhoto.src = event.image;
       eventTitle.innerText = event.name;
       eventDescription.innerText = event.description;
       eventPrice.innerText = `$${event.price}`;
+      eventDetailButton.href = `details.html?eventId=${event._id}`;
     }
   } catch (e) {
     console.error(e);
