@@ -1,3 +1,5 @@
+let homeEvents = {};
+
 /*
  * Remove all child elements from parent
  */
@@ -71,7 +73,7 @@ function search() {
     ".category-item:checked"
   );
   const categories = Array.from(selectedCategories, (m) => m.value);
-  const events = data.events.filter(
+  const events = homeEvents.filter(
     (f) =>
       (searchText == "" ||
         f.name?.toLowerCase().indexOf(searchText) > -1 ||
@@ -82,13 +84,66 @@ function search() {
   fillGrid(events);
 }
 
+function toggleLoading() {
+  const loading = document.querySelector(".loader-anim");
+  loading.classList.toggle("d-none");
+}
+
+function buildCategoriesFilter() {
+  const filterContainer = document.querySelector(".filters");
+  const categoriesContainer = filterContainer.querySelector(".categories");
+  const categoryCheckboxTemplate = document.querySelector(
+    "#category-checkbox-template"
+  );
+  const categories = Array.from(new Set(homeEvents.map((m) => m.category)));
+
+  for (let categoryIdx in categories) {
+    let category = categories[categoryIdx];
+    let currentCategory = categoryCheckboxTemplate.content.cloneNode(true);
+    currentCategory = categoriesContainer.appendChild(currentCategory);
+    currentCategory = categoriesContainer.lastElementChild;
+    let categoryItem = currentCategory.querySelector(".category-item");
+    let categoryCheck = currentCategory.querySelector(".category-check");
+    categoryItem.value = category;
+    let id = `category${categoryIdx}`;
+    categoryItem.setAttribute("id", id);
+    categoryCheck.innerText = category;
+    categoryCheck.setAttribute("for", id);
+  }
+}
+
+function initializeListeners() {
+  const searchFilterButton = document.querySelector(".search-filter-button");
+  searchFilterButton.addEventListener("click", search);
+}
+
+function initializeData() {
+  const url = new URL(window.location.href);
+  const useApi = url.searchParams.get("useApi");
+  const apiUrl =
+    !useApi || useApi == "true"
+      ? "https://mindhub-xj03.onrender.com/api/amazing"
+      : "https://mindhub-xj03.onrender.com/api/wrong-endpoint";
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((jsonResponse) => {
+      homeEvents = jsonResponse.events;
+      buildCategoriesFilter();
+      search();
+    })
+    .catch((error) => {
+      homeEvents = backupData.events;
+      buildCategoriesFilter();
+      search();
+    });
+}
+
 /*
  * Initialize App
  */
 function init() {
-  const searchFilterButton = document.querySelector(".search-filter-button");
-  searchFilterButton.addEventListener("click", search);
-  search();
+  initializeData();
+  initializeListeners();
 }
 
 /*

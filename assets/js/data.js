@@ -1,4 +1,4 @@
-const data = {
+const backupData = {
   currentDate: "2022-01-01",
   events: [
     {

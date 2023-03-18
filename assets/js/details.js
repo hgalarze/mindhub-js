@@ -31,7 +31,24 @@ function getEventById(id) {
   return data.events.find((f) => f._id == id);
 }
 
-const url = new URL(window.location.href);
-const eventId = url.searchParams.get("eventId");
-const currentEvent = getEventById(eventId);
-fillDetails(currentEvent);
+/*
+ * Initialize App
+ */
+function init() {
+  fetch("https://mindhub-xj03.onrender.com/api/amazing")
+    .then((response) => response.json())
+    .then((jsonResponse) => {
+      data = jsonResponse;
+      const url = new URL(window.location.href);
+      const eventId = url.searchParams.get("eventId");
+      const currentEvent = getEventById(eventId);
+      fillDetails(currentEvent);
+    });
+}
+
+/*
+ * Entry point
+ */
+function onloadReady() {
+  init();
+}
