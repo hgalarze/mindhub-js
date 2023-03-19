@@ -1,4 +1,4 @@
-let homeEvents = {};
+let homeEvents = [];
 
 /*
  * Remove all child elements from parent

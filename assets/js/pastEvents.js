@@ -92,7 +92,7 @@ function toggleLoading() {
 /*
 	Get past event list given a date
 */
-function getUpcomingEventsByDate(date, events) {
+function getPastEventsByDate(date, events) {
   let pastEvents = [];
   for (const event of events) {
     if (event.date < date) {
@@ -141,12 +141,12 @@ function initializeData() {
     .then((response) => response.json())
     .then((jsonResponse) => {
       const data = jsonResponse;
-      pastEvents = getUpcomingEventsByDate(data.currentDate, data.events);
+      pastEvents = getPastEventsByDate(data.currentDate, data.events);
       buildCategoriesFilter();
       search();
     })
     .catch((error) => {
-      pastEvents = getUpcomingEventsByDate(
+      pastEvents = getPastEventsByDate(
         backupData.currentDate,
         backupData.events
       );
