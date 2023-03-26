@@ -10,6 +10,11 @@
 	<link href="assets/fontawesome/css/fontawesome.min.css" rel="stylesheet">
 	<link href="assets/fontawesome/css/brands.min.css" rel="stylesheet">
 	<link href="assets/fontawesome/css/solid.min.css" rel="stylesheet">
+	<style>
+		.event-photo {
+			height: 200px;
+		}
+	</style>
 </head>
 
 <body class="d-flex flex-column h-100" onload="onloadReady()">
@@ -93,26 +98,34 @@
 			<div class="d-flex justify-content-between fs-4">
 				<ul class="list-unstyled d-flex mb-0">
 					<li class="me-3">
-						<i class="fa-brands fa-facebook"></i>
+						<a class="text-muted text-decoration-none" href="https://www.facebook.com/MindHubLa?mibextid=ZbWKwL" target="_blank">
+							<i class="fa-brands fa-facebook"></i>
+						</a>
 					</li>
 					<li class="me-3">
-						<i class="fa-brands fa-instagram"></i>
+						<a class="text-muted text-decoration-none" href="https://instagram.com/mindhub_la?igshid=YmMyMTA2M2Y=" target="_blank">
+							<i class="fa-brands fa-instagram"></i>
+						</a>
 					</li>
 					<li class="me-3">
-						<i class="fa-brands fa-whatsapp"></i>
+						<a class="text-muted text-decoration-none" href="https://wa.link/mwiytn" target="_blank">
+							<i class="fa-brands fa-whatsapp"></i>
+						</a>
 					</li>
 				</ul>
-				<span>Cohort</span>
+				<a class="text-muted text-decoration-none" href="https://mindhublab.com/" target="_blank">
+					Cohort
+				</a>
 			</div>
 		</div>
 	</footer>
 
 	<!-- Event Card Template -->
 	<template id="event-card-template">
-		<div class="col col-lg-6 col-xl-3 py-1 py-md-2">
+		<div class="col col-md-6 col-xl-3 py-1 py-md-2">
 			<div class="card h-100">
 				<!-- Event Image -->
-				<img class="event-photo rounded-top" alt="">
+				<img class="event-photo object-fit-cover rounded-top" alt="">
 				<div class="card-body text-center">
 					<!-- Event Title -->
 					<h5 class="card-title event-title"></h5>

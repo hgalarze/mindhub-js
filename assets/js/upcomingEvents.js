@@ -120,6 +120,7 @@ function buildCategoriesFilter() {
     categoryItem.value = category;
     let id = `category${categoryIdx}`;
     categoryItem.setAttribute("id", id);
+    categoryItem.addEventListener("change", search);
     categoryCheck.innerText = category;
     categoryCheck.setAttribute("for", id);
   }
